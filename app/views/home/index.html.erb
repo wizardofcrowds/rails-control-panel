@@ -1,0 +1,61 @@
+<h1>Deploy Your Application</h1>
+<p>To deploy your application, you'll need to use <a href="http://capify.org/">Capistrano</a>.  If you don't already have it installed on your development machine, enter this command at the shell/command prompt:</p>
+<pre>gem install capistrano</pre>
+<p>Once Capistrano is installed, you'll want to apply it to your Rails application.  From the root of your application:</p>
+<pre>capify .</pre>
+<p>Then, replace the default <strong>deploy.rb</strong> that is created with the following:</p>
+<pre>
+require 'Shell'
+set :application, Shell.new.pwd.include?("/") ? Shell.new.pwd.split("/").last : Shell.new.pwd.split("\\").last
+set :repository, "."
+set :domain_name, 'p1.innogile.com'
+set :scm, :none
+set :deploy_via, :copy
+
+set :user, "student"
+set :runner, "student"
+set :password, "jeffcohen"
+
+<% hostname = defined?(INSTANCE_HOSTNAME) ? INSTANCE_HOSTNAME : "error - cannot find ec2 instance" %>
+role :web, '<%= hostname %>'
+role :app, '<%= hostname %>'
+role :db, '<%= hostname %>', :primary => true
+
+desc "Tasks to execute after code update"
+task :after_setup, :roles => [:app, :db] do
+  sudo "chown #{user}:#{user} -R #{deploy_to}"
+end
+
+
+namespace :deploy do
+  desc "Restart Application"
+  task :restart, :roles => :app do
+    phusion_setup
+  end
+  task :start, :roles => :app do
+    phusion_setup
+  end
+  task :stop, :roles => :app do
+    sudo "apache2ctl stop" 
+  end
+end
+
+def phusion_setup
+      run "echo 'INSTANCE_HOSTNAME=\'`curl http://169.254.169.254/latest/meta-data/public-ipv4`\'' >> /u/apps/rails-control-panel/current/config/environment.rb"
+      sudo "rm -f /etc/apache2/sites-enabled/#{application}"
+      sudo "touch /etc/apache2/sites-enabled/#{application}"
+      sudo "chmod 777 /etc/apache2/sites-enabled/#{application}"
+      sudo "echo '<VirtualHost *:80>' >> /etc/apache2/sites-enabled/#{application}"
+      sudo "echo 'ServerName #{domain_name}' >> /etc/apache2/sites-enabled/#{application}"
+      sudo "echo 'DocumentRoot /u/apps/#{application}/current/public' >> /etc/apache2/sites-enabled/#{application}"
+      sudo "echo '</VirtualHost>' >> /etc/apache2/sites-enabled/#{application}"
+      sudo "chmod 744 /etc/apache2/sites-enabled/#{application}"
+      sudo "apache2ctl graceful"
+  #    run "touch #{current_path}/tmp/restart.txt"  
+end
+
+
+</pre>
+    <p>Finally, deploy your application for the first time:</p>
+    <pre>cap deploy:setup
+cap deploy</pre>
