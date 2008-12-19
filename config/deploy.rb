@@ -1,5 +1,4 @@
-require 'Shell'
-set :application, Shell.new.pwd.include?("/") ? Shell.new.pwd.split("/").last : Shell.new.pwd.split("\\").last
+set :application, `pwd`.strip.include?("/") ? `pwd`.strip.split("/").last : `pwd`.strip.split("\\").last
 set :repository, "."
 set :domain_name, 'p1.innogile.com'
 set :scm, :none
