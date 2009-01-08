@@ -3,15 +3,29 @@
 <head>
   <meta http-equiv="Content-type" content="text/html; charset=utf-8">
   <title>Rails Control Panel</title>
+  <%= javascript_include_tag :defaults %>
   <link rel="stylesheet" href="/stylesheets/screen.css" type="text/css" media="screen" charset="utf-8">
-  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.min.js"></script>
-  <script type="text/javascript">
-    $(document).ready(function() {
-      // This is more like it!
-    });
+  <script type="text/javascript" charset="utf-8">
+    <% if flash[:notice] %>
+      Event.observe(window, 'load', function() {
+        new Effect.BlindDown('notice', { duration: 0.5 });
+        setTimeout(
+          function() { 
+            new Effect.BlindUp('notice', { duration: 0.5 }); 
+          }, 6000)});
+    <% end %>
   </script>
 </head>
 <body>
+  <%# if flash[:notice] %>
+    <div id="notice" style="display:none">
+      <div id="notice_message">
+        <%= flash[:notice] if flash[:notice] %>
+      </div>
+      <div id="notice_background">
+      </div>
+    </div>
+  <%# end %>
   <div id="container">
 	<%= yield %>
   </div>

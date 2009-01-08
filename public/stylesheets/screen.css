@@ -48,4 +48,13 @@ div#container {
   width: 860px;
   margin: 20px auto;
 }
+div#notice {
+  background: #000;
+  color: #eee;
+  text-align: center;
+  font-size: 120%;
+}
+div#notice div {
+  padding: 10px;
+}
 /* End Layout */
