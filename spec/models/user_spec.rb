@@ -217,6 +217,15 @@ describe User do
     users(:quentin).remember_token_expires_at.should_not be_nil
     users(:quentin).remember_token_expires_at.between?(before, after).should be_true
   end
+  
+# children
+  it "should create a default sample app" do
+#    App.stub!(:add_a_record).and_return(true)
+#    lambda {
+#      users(:quentin).create_default_app
+#    }.should change(App, :count).by(1)
+  end
+
 
 protected
   def create_user(options = {})

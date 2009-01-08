@@ -18,7 +18,9 @@ class User < ActiveRecord::Base
   validates_uniqueness_of   :email
   validates_format_of       :email,    :with => Authentication.email_regex, :message => Authentication.bad_email_message
 
-  
+  has_many :apps
+
+  after_create :add_unix_user, :create_default_app
 
   # HACK HACK HACK -- how to do attr_accessible from here?
   # prevents a user from submitting a crafted form that bypasses activation
@@ -45,6 +47,15 @@ class User < ActiveRecord::Base
 
   def email=(value)
     write_attribute :email, (value ? value.downcase : nil)
+  end
+
+  def create_default_app
+    self.apps.create(:name => "sample-#{login}", :description=>"An automatically generated sample app for #{login}")
+  end
+  
+  def add_unix_user
+    crypt_password=`perl -e "print crypt(\"gogo#{TUTOR_NAME}\",\"xx\")"`
+    result = `useradd #{login} -d /home/#{login} -m -p #{crypt_password}`
   end
 
   protected

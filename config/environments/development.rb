@@ -15,3 +15,7 @@ config.action_controller.perform_caching             = false
 
 # Don't care if the mailer can't send
 config.action_mailer.raise_delivery_errors = false
+
+# Tutor's dedicated host is TUTORNAME.DNS_DOMAIN (in the below case, jeff.innogile.com)
+DNS_DOMAIN='innogile.com'
+TUTOR_NAME='jeff'
