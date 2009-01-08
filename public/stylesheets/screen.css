@@ -13,7 +13,7 @@ a img {border:none;}
 body {
   font-family: lucida grande, arial, helvetica, sans-serif;
   background: #fff;
-  font-size: 62.5%;
+  font-size: 100%;
 }
 label { 
   display: block;
@@ -26,6 +26,7 @@ p, li {
   color: #404040;
   font-size: 1.2em;
 }
+ul { padding: 0.8em; }
 pre {
   font-size: 1.2em;
   font-family: consolas, courier;
@@ -37,9 +38,10 @@ hr { background: #ddd; color:#ddd; clear:both; float:none; width:100%; height:1p
 hr.space { background: #fff; color: #fff; }
 
 h1 {
-  font-size: 2.4em;
+  font-size: 2.0em;
   font-family: arial, sans-serif;
   font-weight: normal;
+  padding: 1.0em;
 }
 /* End General Page Styles */
 
@@ -58,3 +60,8 @@ div#notice div {
   padding: 10px;
 }
 /* End Layout */
+
+span.hint {
+  font-size: 75%;
+  color: #484644;
+}
