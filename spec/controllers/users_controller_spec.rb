@@ -26,7 +26,7 @@ describe UsersController do
     login_as(:admin)
     lambda do
       create_user
-      response.should redirect_to(users_path)
+      response.should redirect_to(user_path(User.find_by_login('quire')))
     end.should change(User, :count).by(1)
     current_user.should eql(users(:admin))
   end
@@ -119,60 +119,38 @@ describe UsersController, "handling new request" do
   end
 end
 
-describe UsersController, "handling edit request" do
+describe UsersController, "handling show and edit, update request" do
   fixtures :users
   
-  it "should deny if not logged in" do
-    get :edit, :id=>users(:aaron).id
-    response.should redirect_to(root_path)
+  ["show", "edit", "update"].each do |action|
+  
+    it "should deny if not logged in, against #{action}" do
+      get action, :id=>users(:aaron).id
+      response.should redirect_to(root_path)
+    end
+  
+    it "should deny if different user, against #{action}" do
+      login_as(:aaron)
+      get action, :id=>users(:admin).id
+      response.should redirect_to(root_path)
+    end
+  
+    it "should allow if admin, against #{action}" do
+      login_as(:admin)
+      get action, :id=>users(:aaron)
+      response.should action=="update" ? redirect_to(edit_user_path(users(:aaron))) : be_success
+      response.should render_template("users/#{action}") unless action=="update"
+    end
+  
+    it "should redirect to index if the requested by admin user does not exists, against #{action}" do
+      login_as(:admin)
+      get action, :id=>100
+      response.should redirect_to(root_path)
+    end
   end
   
-  it "should deny if different user" do
-    login_as(:aaron)
-    get :edit, :id=>users(:admin).id
-    response.should redirect_to(root_path)
-  end
-  
-  it "should allow if admin" do
-    login_as(:admin)
-    get :edit, :id=>users(:aaron)
-    response.should be_success
-    response.should render_template("users/edit")
-  end
-  
-  it "should redirect to index if the requested by admin user does not exists" do
-    login_as(:admin)
-    get :edit, :id=>100
-    response.should redirect_to(root_path)
-  end
 end
 
-describe UsersController, "handling update request" do
-  fixtures :users
-  
-  it "should deny if not logged in" do
-    put :update, :id=>users(:aaron).id
-    response.should redirect_to(root_path)
-  end
-  
-  it "should deny if different user" do
-    login_as(:aaron)
-    put :update, :id=>users(:admin).id
-    response.should redirect_to(root_path)
-  end
-  
-  it "should allow if admin" do
-    login_as(:admin)
-    put :update, :id=>users(:aaron)
-    response.should redirect_to(edit_user_path(users(:aaron)))
-  end
-  
-  it "should redirect to index if the requested by admin user does not exists" do
-    login_as(:admin)
-    put :update, :id=>100
-    response.should redirect_to(root_path)
-  end
-end
 
 describe UsersController do
   describe "route generation" do

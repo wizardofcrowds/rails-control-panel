@@ -21,3 +21,11 @@
 
 <p><%= submit_tag 'Update' %>&nbsp;<%= link_to("List of #{@user.login}'s apps", "/") %>&nbsp;<%= link_to("Back to User List", users_path) %></p>
 <% end -%>
+<br/>
+<p>User's Apps
+  <ul>
+	<% @user.apps.each do |app| %>
+	  <%= app.name %>
+	<% end %>
+  </ul>		
+</p>

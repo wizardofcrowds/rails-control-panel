@@ -20,7 +20,10 @@ class User < ActiveRecord::Base
 
   has_many :apps
 
-  after_create :add_unix_user, :create_default_app
+  def after_create
+#    add_unix_user
+#    create_default_app
+  end
 
   # HACK HACK HACK -- how to do attr_accessible from here?
   # prevents a user from submitting a crafted form that bypasses activation

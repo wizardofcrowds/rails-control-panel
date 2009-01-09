@@ -35,6 +35,14 @@ class UsersController < ApplicationController
     end
   end
   
+  def show
+    limit_self_access_only
+    unless @user
+      flash[:notice]="You don't have permission to access the user"
+      redirect_to root_path
+    end    
+  end
+  
  
   def create      
 #    logout_keeping_session!
@@ -46,7 +54,7 @@ class UsersController < ApplicationController
       # button. Uncomment if you understand the tradeoffs.
       # reset session
 #      self.current_user = @user # !! now logged in
-      redirect_to users_path
+      redirect_to user_path(@user)
       flash[:notice] = "User #{params[:user][:login]} created."
     else
       flash[:error]  = "We couldn't set up that account, sorry.  Please try again, or contact the creator."

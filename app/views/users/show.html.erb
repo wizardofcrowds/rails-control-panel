@@ -1,0 +1,21 @@
+<h1>Showing Profile of <%= @user.name %></h1>
+
+<p><%= label_tag 'login' %><br/>
+<%= @user.login %></p>
+
+<p><%= label_tag 'email' %><br/>
+<%= @user.email %></p>
+
+<p><%= label_tag 'name' %><br/>
+<%= @user.name %></p>
+
+<p>User's Apps
+  <ul>
+	<% @user.apps.each do |app| %>
+	  <%= app.name %>
+	<% end %>
+  </ul>		
+</p>
+<%= link_to "edit", edit_user_path(@user) %>&nbsp;<%= link_to("Back to index", users_path) if @user.login == "admin" %>
+	
+	
