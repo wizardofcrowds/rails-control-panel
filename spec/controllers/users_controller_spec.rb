@@ -80,13 +80,13 @@ describe UsersController, "handling index request" do
   
   it "should deny if not logged in" do
     get :index
-    response.should redirect_to(root_path)
+    response.should redirect_to(login_path)
   end
   
   it "should deny if not admin" do
     login_as(:aaron)
     get :index
-    response.should redirect_to(root_path)
+    response.should redirect_to(login_path)
   end
   
   it "should allow if admin" do
@@ -102,13 +102,13 @@ describe UsersController, "handling new request" do
   
   it "should deny if not logged in" do
     get :new
-    response.should redirect_to(root_path)
+    response.should redirect_to(login_path)
   end
   
   it "should deny if not admin" do
     login_as(:aaron)
     get :new
-    response.should redirect_to(root_path)
+    response.should redirect_to(login_path)
   end
   
   it "should allow if admin" do
@@ -126,7 +126,7 @@ describe UsersController, "handling show and edit, update request" do
   
     it "should deny if not logged in, against #{action}" do
       get action, :id=>users(:aaron).id
-      response.should redirect_to(root_path)
+      response.should redirect_to(login_path)
     end
   
     it "should deny if different user, against #{action}" do

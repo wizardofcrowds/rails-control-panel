@@ -1,7 +1,6 @@
 class UsersController < ApplicationController
 
   before_filter :admin_login_required, :except => [:show, :update, :edit]
-  before_filter :login_required
 
   # render new.rhtml
   def new
