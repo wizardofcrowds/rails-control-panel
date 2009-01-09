@@ -1,7 +1,7 @@
 <h1>List of Users Created by <%= current_user.name %></h1>
 
 <ul>
-<% @users.reject{|u| u.login=="admin"}.each do |user| %>
+<% @users.reject{|u| u.admin?}.each do |user| %>
   <li><%= user.name %>&nbsp;<span class="hint">added <%= human_time(user.created_at) %></span>&nbsp;<%= link_to "edit", edit_user_path(user) %>&nbsp;
 <% end %>
 </ul>

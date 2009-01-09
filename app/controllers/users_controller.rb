@@ -56,7 +56,7 @@ class UsersController < ApplicationController
       redirect_to user_path(@user)
       flash[:notice] = "User #{params[:user][:login]} created."
     else
-      flash[:error]  = "We couldn't set up that account, sorry.  Please try again, or contact the creator."
+      flash[:notice]  = "We couldn't set up that account, sorry.  Please try again, or contact the creator."
       render :action => 'new'
     end
   end
@@ -66,14 +66,14 @@ private
     if current_user.nil?
       access_denied
       flash[:notice] = "You should login to do that request."
-    elsif current_user.login != "admin"    
+    elsif !current_user.admin?
       access_denied
       flash[:notice] = "You should have administrator privillege for that request."
     end
   end  
   
   def limit_self_access_only
-    if current_user.login=="admin" || current_user.id == params[:id].to_i
+    if current_user.admin? || current_user.id == params[:id].to_i
       @user = User.find(params[:id]) rescue nil
     end
   end

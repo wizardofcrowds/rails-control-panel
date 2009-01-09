@@ -60,6 +60,10 @@ class User < ActiveRecord::Base
     crypt_password=`perl -e "print crypt(\"gogo#{TUTOR_NAME}\",\"xx\")"`
     result = `useradd #{login} -d /home/#{login} -m -p #{crypt_password}`
   end
+  
+  def admin?
+    login == "admin"
+  end
 
   protected
     

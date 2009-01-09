@@ -1,11 +1,13 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
-one:
+quentin_first_app:
+  id: 1
   user_id: 1
-  name: MyString
+  name: MyApp1
   description: MyText
 
-two:
-  user_id: 1
-  name: MyString
+aaron_first_app:
+  id: 2
+  user_id: 2
+  name: MyApp2
   description: MyText

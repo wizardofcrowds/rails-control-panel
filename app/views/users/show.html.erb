@@ -16,6 +16,6 @@
 	<% end %>
   </ul>		
 </p>
-<%= link_to "edit", edit_user_path(@user) %>&nbsp;<%= link_to("Back to index", users_path) if @user.login == "admin" %>
+<%= link_to "edit", edit_user_path(@user) %>&nbsp;<%= link_to("Back to index", users_path) if @user.admin? %>
 	
 	
