@@ -25,7 +25,8 @@ class App < ActiveRecord::Base
   end
   
   def create_rails_environment
-    `su #{user.login};cd #{HOME_DIR}/#{self.user.login};rails #{name}`
+    `rails #{HOME_DIR}/#{self.user.login}/#{name} -s`
+    `chown #{self.user.login}:#{self.user.login} #{HOME_DIR}/#{self.user.login}/#{name} -R`
     `echo "<VirtualHost \*:80>" > /etc/apache2/sites-enabled/#{name}`
     `echo "  ServerName #{url}" >> /etc/apache2/sites-enabled/#{name}`
     `echo "  DocumentRoot #{HOME_DIR}/#{self.user.login}/#{name}/public" >> /etc/apache2/sites-enabled/#{name}`
