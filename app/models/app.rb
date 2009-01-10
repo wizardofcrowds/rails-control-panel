@@ -1,6 +1,5 @@
 class App < ActiveRecord::Base
   include Authentication
-  require 'nettica/client'
   
   belongs_to :user
   validates_presence_of :name, :user_id
