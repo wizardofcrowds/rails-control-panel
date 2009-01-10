@@ -15,6 +15,15 @@ class AppsController < ApplicationController
       redirect_to root_path
     end
   end
+  
+  def index
+    unless find_user
+      flash[:notice] = "User not found"
+      redirect_to root_path
+      return
+    end
+    @apps = @user.apps
+  end
 
   def new
     unless find_user
@@ -34,6 +43,19 @@ class AppsController < ApplicationController
         redirect_to user_apps_path(@user)      
       end
     end    
+  end
+  
+  def show
+    unless find_user
+      flash[:notice] = "You cannot see an app which is not yours. Need to login as that user"
+      access_denied
+    else
+      @app = @user.apps.find(params[:id]) rescue nil
+      unless @app
+        flash[:notice] = "Requested app not found"
+        redirect_to user_apps_path(@user)      
+      end
+    end
   end
   
   def update

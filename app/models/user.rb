@@ -21,8 +21,10 @@ class User < ActiveRecord::Base
   has_many :apps
 
   def after_create
-#    add_unix_user
-#    create_default_app
+    unless RAILS_ENV == "test"
+      add_unix_user
+      create_default_app
+    end
   end
 
   # HACK HACK HACK -- how to do attr_accessible from here?
@@ -57,8 +59,12 @@ class User < ActiveRecord::Base
   end
   
   def add_unix_user
-    crypt_password=`perl -e "print crypt(\"gogo#{TUTOR_NAME}\",\"xx\")"`
-    result = `useradd #{login} -d /home/#{login} -m -p #{crypt_password}`
+    if RAILS_ENV=="production"
+      crypt_password=`perl -e "print crypt(\"gogo#{TUTOR_NAME}\",\"xx\")"`
+      result = `useradd #{login} -d /#{HOME_DIR}/#{login} -m -p #{crypt_password}`
+    elsif RAILS_ENV=="development"
+      `mkdir -p "#{HOME_DIR}/#{login}"`
+    end
   end
   
   def admin?

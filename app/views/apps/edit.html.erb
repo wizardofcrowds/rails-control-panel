@@ -1,0 +1,10 @@
+<h1>Edit <%= @user.login %>'s rails app <b><%= @app.name %></b>'s profile</h1>
+
+<%= error_messages_for :app %>
+<% form_for [@user,@app] do |f| -%>
+
+<p><%= label_tag 'description' %><br/>
+<%= f.text_area :description %></p>
+
+<p><%= submit_tag 'Update' %></p>
+<% end -%>

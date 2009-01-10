@@ -23,3 +23,4 @@ config.action_mailer.delivery_method = :test
 
 DNS_DOMAIN='innogile.com'
 TUTOR_NAME='hoge'
+HOME_DIR = "/Users/koichihirano/tmp"

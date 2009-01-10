@@ -1,0 +1,8 @@
+<h1>List of Apps Created by <%= @user.name %></h1>
+
+<ul>
+<% @apps.each do |app| %>
+  <li><%= app.name %>&nbsp;<span class="hint">added <%= human_time(app.created_at) %></span>&nbsp;<%= link_to "edit", edit_user_app_path(@user, app) %>&nbsp;
+<% end %>
+</ul>
+<%= link_to "New App", new_user_app_url(@user) %>

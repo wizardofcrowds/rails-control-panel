@@ -1,0 +1,47 @@
+<h1>Showing <%= @user.login %>'s App <b><%= @app.name %></b></h1>
+
+<p><%= label_tag 'name' %><br/>
+<%= @app.name %></p>
+
+<p><%= label_tag 'description' %><br/>
+<%= @app.description %></p>
+
+<p><%= label_tag 'url' %><br/>
+<%= link_to app_url(@app), "http://#{app_url(@app)}" %>
+</p>
+
+<%= link_to "edit", edit_user_app_path(@user, @app) %>&nbsp;<%= link_to("Back to index", user_apps_path(@user)) %>
+	
+<h1>Deploy Your Application</h1>
+<p>To deploy your application, you'll need to use <a href="http://capify.org/">Capistrano</a>.  If you don't already have it installed on your development machine, enter this command at the shell/command prompt:</p>
+<pre>gem install capistrano</pre>
+<p>Once Capistrano is installed, you'll want to apply it to your Rails application.  From the root of your application:</p>
+<pre>capify .</pre>
+<p>Then, replace the default <strong>deploy.rb</strong> that is created with the following:</p>
+<pre>
+set :application, <%= @app.name %>
+set :repository, "."
+set :scm, :none
+set :deploy_via, :copy
+
+set :user, "<%= @app.user.login %>"
+set :runner, "<%= @app.user.login %>"
+set :password, "gogo<%= TUTOR_NAME %>"
+
+<% hostname = defined?(INSTANCE_HOSTNAME) ? INSTANCE_HOSTNAME : "error - cannot find ec2 instance" %>
+role :web, '<%= hostname %>'
+role :app, '<%= hostname %>'
+role :db, '<%= hostname %>', :primary => true
+
+namespace :deploy do
+  desc "Restart Application"
+  task :restart, :roles => :app do
+    run "touch #{current_path}/tmp/restart.txt"
+  end
+end
+
+</pre>
+    <p>Finally, deploy your application for the first time. Under your rails root directory:</p>
+    <pre>cap deploy:setup
+cap deploy</pre>
+	
