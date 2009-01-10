@@ -27,10 +27,10 @@ class App < ActiveRecord::Base
   
   def create_rails_environment
     `su #{user.login};cd #{HOME_DIR}/#{self.user.login};rails #{name}`
-    `echo "<VirtualHost *:80>" > /etc/apache2/sites-enabled/#{name}`
+    `echo "<VirtualHost \*:80>" > /etc/apache2/sites-enabled/#{name}`
     `echo "  ServerName #{url}" >> /etc/apache2/sites-enabled/#{name}`
-    `echo "  DocumentRoot #{HOME_DIR}/#{self.user.login}/#{name}/public" > /etc/apache2/sites-enabled/#{name}`
-    `echo "</VirtualHost" > /etc/apache2/sites-enabled/#{name}`
+    `echo "  DocumentRoot #{HOME_DIR}/#{self.user.login}/#{name}/public" >> /etc/apache2/sites-enabled/#{name}`
+    `echo "</VirtualHost>" >> /etc/apache2/sites-enabled/#{name}`
     `/etc/init.d/apache2 reload`
   end
   
