@@ -5,8 +5,4 @@ module ApplicationHelper
     "#{time_ago_in_words(time)} ago"
   end
   
-  def app_url(app)
-    "#{app.name}.#{TUTOR_NAME}.#{DNS_DOMAIN}"
-  end
-
 end

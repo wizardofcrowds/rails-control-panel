@@ -21,8 +21,17 @@ class App < ActiveRecord::Base
     client.add_record(d)
   end
   
+  def url
+    "#{name}.#{TUTOR_NAME}.#{DNS_DOMAIN}"
+  end
+  
   def create_rails_environment
-    `cd #{HOME_DIR}/#{self.user.login};rails #{name}`
+    `su #{user.login};cd #{HOME_DIR}/#{self.user.login};rails #{name}`
+    `echo "<VirtualHost *:80>" > /etc/apache2/sites-enabled/#{name}`
+    `echo "  ServerName #{url}" >> /etc/apache2/sites-enabled/#{name}`
+    `echo "  DocumentRoot #{HOME_DIR}/#{self.user.login}/#{name}/public" > /etc/apache2/sites-enabled/#{name}`
+    `echo "</VirtualHost" > /etc/apache2/sites-enabled/#{name}`
+    `/etc/init.d/apache2 reload`
   end
   
 end
