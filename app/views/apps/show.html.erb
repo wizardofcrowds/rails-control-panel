@@ -26,6 +26,7 @@ set :repository, "."
 set :scm, :none
 set :deploy_via, :copy
 set :deploy_to, "<%= "#{HOME_DIR}/#{@app.user.login}/#{@app.name}" %>"
+set :use_sudo, false
 
 set :user, "<%= @app.user.login %>"
 set :runner, "<%= @app.user.login %>"
