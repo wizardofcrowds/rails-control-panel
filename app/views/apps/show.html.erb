@@ -13,6 +13,8 @@
 <hr class="space"/>
 	
 <h2>How to Deploy</h2>
+<p>This application should be named as <%= @app.name %>, i.e. you should create (or should have created) the app by:</p>
+<pre>rails <%= @app.name %></pre>
 <p>To deploy your application, you'll need to use <a href="http://capify.org/">Capistrano</a>.  If you don't already have it installed on your development machine, enter this command at the shell/command prompt:</p>
 <pre>gem install capistrano</pre>
 <p>Once Capistrano is installed, you'll want to apply it to your Rails application.  From the root of your application:</p>
