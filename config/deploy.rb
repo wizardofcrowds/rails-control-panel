@@ -1,9 +1,9 @@
 set :application, `pwd`.strip.include?("/") ? `pwd`.strip.split("/").last : `pwd`.strip.split("\\").last
 set :repository, "."
-set :domain_name, 'p1.innogile.com'
+set :domain_name, 'innogile.com'
 set :scm, :none
 set :deploy_via, :copy
-set :deploy_port, 10000
+set :deploy_port, 9290
  
 set :user, "student"
 set :runner, "student"
@@ -16,7 +16,7 @@ role :db, 'ec2-75-101-254-49.compute-1.amazonaws.com', :primary => true
 desc "Tasks to execute after code update"
 task :after_setup, :roles => [:app, :db] do
   sudo "chown #{user}:#{user} -R #{deploy_to}"
-  run "thin config -C #{deploy_to}/thin.yml --servers 1 --port 10000 --chdir #{current_path} --environment production"
+  run "thin config -C #{deploy_to}/thin.yml --servers 1 --port 9290 --chdir #{current_path} --environment production"
 end
 
 namespace :deploy do

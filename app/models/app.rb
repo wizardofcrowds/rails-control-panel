@@ -29,7 +29,7 @@ class App < ActiveRecord::Base
     `chown #{self.user.login}:#{self.user.login} #{HOME_DIR}/#{self.user.login}/#{name} -R`
     `echo "<VirtualHost \*:80>" > /etc/apache2/sites-enabled/#{name}`
     `echo "  ServerName #{url}" >> /etc/apache2/sites-enabled/#{name}`
-    `echo "  DocumentRoot #{HOME_DIR}/#{self.user.login}/#{name}/public" >> /etc/apache2/sites-enabled/#{name}`
+    `echo "  DocumentRoot #{HOME_DIR}/#{self.user.login}/#{name}/current/public" >> /etc/apache2/sites-enabled/#{name}`
     `echo "</VirtualHost>" >> /etc/apache2/sites-enabled/#{name}`
     `/etc/init.d/apache2 reload`
   end

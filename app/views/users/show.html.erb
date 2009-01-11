@@ -1,5 +1,15 @@
 <h1><%= @user.name %>'s Rails Dashboard</h1>
 
+<% if @user.admin? %>
+<h2>Welcome, the administrator of this server.</h2>
+<div id="welcome-admin">
+<p>You can add users and let them create rails deployment environment on this server. Before creating an user, you may want to <%= link_to "create your own", new_user_app_path(@user) %> and deploy some apps to this server. </p>
+<p>Then you may want to <%= link_to "create users", new_user_path %> and invite them.</p>
+
+<p><b>IMPORTANT!:</b> Every user's default password to this server will be "gogo<%= TUTOR_NAME %>" (and yours too!). We mean, when they deploy, they will use "gogo<%= TUTOR_NAME %>", and this is different from their login password for this rails-control-panel.</p>
+<% end %>
+</div>
+
 <h2><%= @user.name %>'s Apps Running on This Server</h2>
 <br/><span class="hint">You can see how to deploy by clicking details links.</span>
 <ul>
@@ -11,7 +21,7 @@
 </ul>
 Or Have an App You Want to Deploy? Create a Deployment Environment from <%= link_to "Here!", new_user_app_path(@user) %>
 <hr class="space"/>
-<h2>Your Profile</h2>
+<h2><%= @user.name %> Profile</h2>
 
 <ul class="quiet">
 <li>Login:&nbsp;<%= @user.login %>&nbsp;<span class="hint">This is to login this dashboard and used in deployment process.</span></li>
@@ -19,6 +29,6 @@ Or Have an App You Want to Deploy? Create a Deployment Environment from <%= link
 <li>Name:&nbsp;</span><%= @user.name %>&nbsp;<span class="hint">Your name. Just for display purposes.</span></li>
 </ul>
 
-&nbsp;You can edit them from <%= link_to "here", edit_user_path(@user) %>.&nbsp;<%= link_to("List of Users? (Admin only)", users_path) if @user.admin? %>
+&nbsp;You can edit them from <%= link_to "here", edit_user_path(@user) %>.&nbsp;<%= link_to("List of Users? (Admin only)", users_path) if current_user.admin? %>
 	
 	

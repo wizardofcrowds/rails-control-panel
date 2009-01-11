@@ -1,7 +1,7 @@
 <h1>List of Users Created by <%= current_user.name %></h1>
 
 <ul>
-<% @users.reject{|u| u.admin?}.each do |user| %>
+<% @users.each do |user| %>
   <li><%= "#{user.name} (#{user.login})" %>&nbsp;<span class="hint">added <%= human_time(user.created_at) %></span>&nbsp;<%= link_to "show", user_path(user) %>&nbsp;
 	<ul class="quiet">
 		<%= "<li>No app yet</li>" if user.apps.empty? %>
