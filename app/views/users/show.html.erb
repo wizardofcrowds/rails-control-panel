@@ -3,7 +3,7 @@
 <h2><%= @user.name %>'s Apps Running on This Server</h2>
 <br/><span class="hint">You can see how to deploy by clicking details links.</span>
 <ul>
-	<%= "<li>No app yet</li>" if user.apps.empty? %>
+	<%= "<li>No app yet</li>" if @user.apps.empty? %>
 	
 <% @user.apps.each do |app| %>
   <li><span class="loud"><%= link_to app.name, "http://" + app.url %></span><%= app.description %><span class="hint"><%=link_to "Details", user_app_path(@user, app) %></span></li>
