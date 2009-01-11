@@ -14,15 +14,20 @@ body {
   font-family: lucida grande, arial, helvetica, sans-serif;
   background: #fff;
   font-size: 100%;
+  color:#4D4D4D;
 }
 label { 
   display: block;
   font-weight: bold;
   cursor: pointer;
 }
-p { padding: 0.8em 0; }
-p, li {
-  line-height: 1.7em;
+p { padding: 0.8em 0;
+  line-height: 1.0em;
+  color: #404040;
+  font-size: 1.2em;
+}
+li {
+  line-height: 1.6em;
   color: #404040;
   font-size: 1.2em;
 }
@@ -32,16 +37,24 @@ pre {
   font-family: consolas, courier;
   background: #000;
   color: #25FF12;
-  padding: 20px;
+  padding: 1em;
 }
 hr { background: #ddd; color:#ddd; clear:both; float:none; width:100%; height:1px; margin: 1.5em 0; border:none; }
 hr.space { background: #fff; color: #fff; }
-
+input[type="text"], input[type="password"], textarea { background: url(/images/input_bg.png) repeat-x top left; font-size: 120%; padding: 3px; }
 h1 {
   font-size: 2.0em;
   font-family: arial, sans-serif;
   font-weight: normal;
   padding: 1.0em;
+  color: #B86A16;
+}
+h2 {
+  font-size: 1.6em;
+  font-family: arial, sans-serif;
+  font-weight: normal;
+  padding: 0.8em, 0em, 0.8em, 0em;
+  color: #404040;
 }
 /* End General Page Styles */
 
@@ -59,9 +72,30 @@ div#notice {
 div#notice div {
   padding: 10px;
 }
+.hint {
+  font-size: 80%;
+  color: #484644;
+  padding-left: 0.5em;
+}
+span.loud {
+  font-size: 1.2em;
+  font-weight: bold;
+  padding: 0.4em;
+}
+span.command {
+  font-family: consolas, courier;
+}
+ul.quiet {
+  list-style-type: none;
+}
+.fieldWithErrors {
+  padding: 2px;
+  background-color: #FB6369;
+  display: table;
+}
+.errorExplanation {
+  background:#FB6369 none repeat scroll 0 0;
+  padding: 0.4em;
+}
 /* End Layout */
 
-span.hint {
-  font-size: 75%;
-  color: #484644;
-}

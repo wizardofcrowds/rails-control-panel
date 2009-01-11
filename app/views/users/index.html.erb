@@ -2,7 +2,12 @@
 
 <ul>
 <% @users.reject{|u| u.admin?}.each do |user| %>
-  <li><%= user.name %>&nbsp;<span class="hint">added <%= human_time(user.created_at) %></span>&nbsp;<%= link_to "edit", edit_user_path(user) %>&nbsp;
+  <li><%= "#{user.name} (#{user.login})" %>&nbsp;<span class="hint">added <%= human_time(user.created_at) %></span>&nbsp;<%= link_to "show", user_path(user) %>&nbsp;
+	<ul class="quiet">
+		<% user.apps.each do |app| %>
+		  <li><span class="hint"><%= link_to app.name, "http://" + app.url %>&nbsp;<%= app.description[0..50] %>...&nbsp;<%=link_to "Details", user_app_path(user, app) %></span></li>
+		<% end %>
+	</ul>
 <% end %>
 </ul>
 <%= link_to "New user", new_user_url %>

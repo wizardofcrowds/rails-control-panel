@@ -5,4 +5,4 @@
   <li><%= app.name %>&nbsp;<span class="hint">added <%= human_time(app.created_at) %></span>&nbsp;<%= link_to "edit", edit_user_app_path(@user, app) %>&nbsp;
 <% end %>
 </ul>
-<%= link_to "New App", new_user_app_url(@user) %>
+<%= link_to "New App", new_user_app_url(@user) %>&nbsp;Or <%= link_to "View #{@user.name} Profile", user_path(@user) %>

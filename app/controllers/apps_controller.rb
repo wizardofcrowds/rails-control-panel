@@ -8,7 +8,7 @@ class AppsController < ApplicationController
         redirect_to user_app_path(@user, @app)
       else
         flash[:notice] = "Failed to register your app #{@app.name}"
-        redirect_to new_user_app_path(@user)
+        render :action => :new
       end
     else
       flash[:notice] = "Appropriate user not found, failed to register the app"

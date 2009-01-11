@@ -1,18 +1,18 @@
-<h1>Showing <%= @user.login %>'s App <b><%= @app.name %></b></h1>
+<h1><%= @user.login %>'s App <b><%= @app.name %></b></h1>
 
-<p><%= label_tag 'name' %><br/>
-<%= @app.name %></p>
+<h2>Application Profile</h2>
 
-<p><%= label_tag 'description' %><br/>
-<%= @app.description %></p>
+<ul class="quiet">
+<li>Name:&nbsp;<%= @app.name %>&nbsp;</li>
+<li>Description:&nbsp;<%= @app.description %></li>
+<li>Location:&nbsp;<%= link_to @app.url, "http://#{@app.url}" %></li>
+</ul>
 
-<p><%= label_tag 'url' %><br/>
-<%= link_to @app.url, "http://#{@app.url}" %>
-</p>
+&nbsp;You can edit the description from <%= link_to "here", edit_user_app_path(@user, @app) %>&nbsp;Or <%= link_to("Back to index", user_apps_path(@user)) %>
 
-<%= link_to "edit", edit_user_app_path(@user, @app) %>&nbsp;<%= link_to("Back to index", user_apps_path(@user)) %>
+<hr class="space"/>
 	
-<h1>Deploy Your Application</h1>
+<h2>How to Deploy</h2>
 <p>To deploy your application, you'll need to use <a href="http://capify.org/">Capistrano</a>.  If you don't already have it installed on your development machine, enter this command at the shell/command prompt:</p>
 <pre>gem install capistrano</pre>
 <p>Once Capistrano is installed, you'll want to apply it to your Rails application.  From the root of your application:</p>

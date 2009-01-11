@@ -1,13 +1,13 @@
 <h1>Create a new rails app environment</h1>
 
-<%= error_messages_for :app %>
+<%= error_messages_for 'app', :object => @app, :header_message => "Please Try Again!", :message => "We had some problems registering the app:" %>
 <% form_for :app, :url => user_apps_path(@user) do |f| -%>
 
-<p><%= label_tag 'name' %><br/>
+<p><%= label_tag 'name' %><br/><span class="hint">Your app name. Should be unique on this server. Named when you create it with <span class="command">rails</span> command. e.g. MyFirstApp if you create <br/><span class="command">rails [maybe_some_directory/]MyFirstApp</span> </span><br/><br/>
 <%= f.text_field :name %></p>
 
 <p><%= label_tag 'description' %><br/>
-<%= f.text_area :description %></p>
+<%= f.text_area :description, :cols => 60, :rows => 15 %></p>
 
-<p><%= submit_tag 'Create' %></p>
+<p><%= submit_tag 'Create' %>&nbsp;Or <%= link_to "Cancel", user_path(@user) %></p>
 <% end -%>

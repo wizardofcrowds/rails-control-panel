@@ -19,13 +19,7 @@
 <p><%= label_tag 'password_confirmation', 'Confirm Password' %><br/>
 <%= f.password_field :password_confirmation %></p>
 
-<p><%= submit_tag 'Update' %>&nbsp;<%= link_to("List of #{@user.login}'s apps", "/") %>&nbsp;<%= link_to("Back to User List", users_path) %></p>
+<p><%= submit_tag 'Update' %>&nbsp;</p>
 <% end -%>
 <br/>
-<p>User's Apps
-  <ul>
-	<% @user.apps.each do |app| %>
-	  <%= app.name %>
-	<% end %>
-  </ul>		
-</p>
+<%= link_to("Back to Dashboard", user_path(@user)) %>

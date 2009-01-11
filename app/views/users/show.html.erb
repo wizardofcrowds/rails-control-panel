@@ -1,21 +1,22 @@
-<h1>Showing Profile of <%= @user.name %></h1>
+<h1><%= @user.name %>'s Rails Dashboard</h1>
 
-<p><%= label_tag 'login' %><br/>
-<%= @user.login %></p>
+<h2><%= @user.name %>'s Apps Running on This Server</h2>
+<br/><span class="hint">You can see how to deploy by clicking details links.</span>
+<ul>
+<% @user.apps.each do |app| %>
+  <li><span class="loud"><%= link_to app.name, "http://" + app.url %></span><%= app.description %><span class="hint"><%=link_to "Details", user_app_path(@user, app) %></span></li>
+<% end %>
+</ul>
+Or Have an App You Want to Deploy? Create a Deployment Environment from <%= link_to "Here!", new_user_app_path(@user) %>
+<hr class="space"/>
+<h2>Your Profile</h2>
 
-<p><%= label_tag 'email' %><br/>
-<%= @user.email %></p>
+<ul class="quiet">
+<li>Login:&nbsp;<%= @user.login %>&nbsp;<span class="hint">This is to login this dashboard and used in deployment process.</span></li>
+<li>Email:&nbsp;<%= @user.email %></li>
+<li>Name:&nbsp;</span><%= @user.name %>&nbsp;<span class="hint">Your name. Just for display purposes.</span></li>
+</ul>
 
-<p><%= label_tag 'name' %><br/>
-<%= @user.name %></p>
-
-<p>User's Apps
-  <ul>
-	<% @user.apps.each do |app| %>
-	  <%= app.name %>
-	<% end %>
-  </ul>		
-</p>
-<%= link_to "edit", edit_user_path(@user) %>&nbsp;<%= link_to("Back to index", users_path) if @user.admin? %>
+&nbsp;You can edit them from <%= link_to "here", edit_user_path(@user) %>.&nbsp;<%= link_to("List of Users? (Admin only)", users_path) if @user.admin? %>
 	
 	
