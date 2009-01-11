@@ -97,5 +97,9 @@ ul.quiet {
   background:#FB6369 none repeat scroll 0 0;
   padding: 0.4em;
 }
+#welcome-admin, #admin-hint {
+  background:#FBEC73 none repeat scroll 0 0;
+  padding: 0.4em;	
+}
 /* End Layout */
 

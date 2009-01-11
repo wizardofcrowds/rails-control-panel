@@ -1,14 +1,20 @@
 <h1><%= @user.name %>'s Rails Dashboard</h1>
 
-<% if @user.admin? %>
+<% if @user.admin? && current_user.admin? %>
 <h2>Welcome, the administrator of this server.</h2>
 <div id="welcome-admin">
 <p>You can add users and let them create rails deployment environment on this server. Before creating an user, you may want to <%= link_to "create your own", new_user_app_path(@user) %> and deploy some apps to this server. </p>
 <p>Then you may want to <%= link_to "create users", new_user_path %> and invite them.</p>
 
 <p><b>IMPORTANT!:</b> Every user's default password to this server will be "gogo<%= TUTOR_NAME %>" (and yours too!). We mean, when they deploy, they will use "gogo<%= TUTOR_NAME %>", and this is different from their login password for this rails-control-panel.</p>
-<% end %>
 </div>
+<% end %>
+
+<% if !@user.admin? && current_user.admin? %>
+<div id="admin-hint">
+<p>You may want to invite this user by noting the url of this page, the user's login and the password you have just entered to create this user.</p>
+</div>
+<% end %>
 
 <h2><%= @user.name %>'s Apps Running on This Server</h2>
 <br/><span class="hint">You can see how to deploy by clicking details links.</span>
