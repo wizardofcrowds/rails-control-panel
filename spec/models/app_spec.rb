@@ -43,5 +43,4 @@ describe 'disallows illegitimate app names:' do
     end
   end
   
-  it "should not allow controller to create sample-loginname name of app"
 end

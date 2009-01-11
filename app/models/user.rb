@@ -23,7 +23,7 @@ class User < ActiveRecord::Base
   def after_create
     unless RAILS_ENV == "test"
       add_unix_user
-      create_default_app
+#      create_default_app
     end
   end
 

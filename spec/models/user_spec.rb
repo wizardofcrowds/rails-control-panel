@@ -219,7 +219,7 @@ describe User do
   end
   
 # children
-  it "should create a default sample app" do
+  it "should not create a default sample app" do
 #    App.stub!(:add_a_record).and_return(true)
 #    lambda {
 #      users(:quentin).create_default_app

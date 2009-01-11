@@ -21,10 +21,11 @@
 <pre>capify .</pre>
 <p>Then, replace the default <strong>deploy.rb</strong> that is created with the following:</p>
 <pre>
-set :application, <%= @app.name %>
+set :application, "<%= @app.name %>"
 set :repository, "."
 set :scm, :none
 set :deploy_via, :copy
+set :deploy_to, "<%= "#{HOME_DIR}/#{@app.user.login}/#{@app.name}" %>"
 
 set :user, "<%= @app.user.login %>"
 set :runner, "<%= @app.user.login %>"
