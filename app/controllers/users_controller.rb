@@ -56,7 +56,7 @@ class UsersController < ApplicationController
       redirect_to user_path(@user)
       flash[:notice] = "User #{params[:user][:login]} created."
     else
-      flash[:notice]  = "We couldn't set up that account, sorry.  Please try again, or contact the creator."
+      flash[:notice]  = "We couldn't set up that account, sorry.  Please try again, or contact the server owner."
       render :action => 'new'
     end
   end

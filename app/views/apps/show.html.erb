@@ -1,4 +1,4 @@
-<h1><%= @user.login %>'s App <b><%= @app.name %></b></h1>
+<h1><%= @app.user.admin ? OWNER : @app.user.login %>'s App <b><%= @app.name %></b></h1>
 
 <h2>Application Profile</h2>
 
@@ -13,7 +13,7 @@
 <hr class="space"/>
 	
 <h2>How to Deploy</h2>
-<p>This application should be named as <%= @app.name %>, i.e. you should create (or should have created) the app by:</p>
+<p>This application can be named as <%= @app.name %>, i.e. you can create the app by:</p>
 <pre>rails <%= @app.name %></pre>
 <p>To deploy your application, you'll need to use <a href="http://capify.org/">Capistrano</a>.  If you don't already have it installed on your development machine, enter this command at the shell/command prompt:</p>
 <pre>gem install capistrano</pre>
@@ -30,12 +30,11 @@ set :use_sudo, false
 
 set :user, "<%= @app.user.login %>"
 set :runner, "<%= @app.user.login %>"
-set :password, "gogo<%= SUB_DOMAIN %>"
+set :password, "<%= @app.user.plain %>"
 
-<% hostname = defined?(INSTANCE_HOSTNAME) ? INSTANCE_HOSTNAME : "error - cannot find ec2 instance" %>
-role :web, '<%= hostname %>'
-role :app, '<%= hostname %>'
-role :db, '<%= hostname %>', :primary => true
+role :web, '<%= "#{SUB_DOMAIN}.#{DNS_DOMAIN}" %>'
+role :app, '<%= "#{SUB_DOMAIN}.#{DNS_DOMAIN}" %>'
+role :db, '<%= "#{SUB_DOMAIN}.#{DNS_DOMAIN}" %>', :primary => true
 
 namespace :deploy do
   desc "Restart Application"
