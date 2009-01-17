@@ -3,7 +3,7 @@
 <%= error_messages_for 'app', :object => @app, :header_message => "Please Try Again!", :message => "We had some problems registering the app:" %>
 <% form_for :app, :url => user_apps_path(@user) do |f| -%>
 
-<p><%= label_tag 'name' %><br/><span class="hint">Your app name. Should be unique on this server. Named when you create it with <span class="command">rails</span> command. e.g. MyFirstApp if you create <br/><span class="command">rails [maybe_some_directory/]MyFirstApp</span> </span><br/><br/>
+<p><%= label_tag 'name' %><br/><span class="hint">Your app name. Should be unique on this server. Could be anything or the name when you create it with <span class="command">rails</span> command. e.g. MyFirstApp if you create <br/><span class="command">rails [maybe_some_directory/]MyFirstApp</span> </span><br/><br/>
 <%= f.text_field :name %></p>
 
 <p><%= label_tag 'description' %><br/>

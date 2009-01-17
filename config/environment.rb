@@ -15,6 +15,8 @@ HOME_DIR = "/home"
 DNS_DOMAIN='innogile.com'
 SUB_DOMAIN='jeff'
 INSTANCE_HOSTNAME="localhost"
+OWNER = "somebody"
+ORDER_SECRET ='secret'
 
 Rails::Initializer.run do |config|
   # Settings in config/environments/* take precedence over those specified here.
