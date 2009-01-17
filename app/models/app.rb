@@ -15,13 +15,17 @@ class App < ActiveRecord::Base
   end
   
   def add_a_record
-    client = Nettica::Client.new(NETTICA_USER,NETTICA_PASSWORD)
-    d = client.create_domain_record(DNS_DOMAIN, "#{name}.#{TUTOR_NAME}", "A", "67.202.40.233", 1)
-    client.add_record(d)
+    #TODO replace this with get
+    uri = "http://#{DNS_DOMAIN}/arecords/add/#{ORDER_SECRET}?subdomain=#{SUB_DOMAIN}&subsubdomain=#{name}"
+    Net::HTTP.get(URI.parse(uri))
+    # client = Nettica::Client.new(NETTICA_USER,NETTICA_PASSWORD)
+    # public_ipv4 = `curl  http://169.254.169.254/latest/meta-data/public-ipv4`
+    # d = client.create_domain_record(DNS_DOMAIN, "#{name}.#{SUB_DOMAIN}", "A", public_ipv4, 1)
+    # client.add_record(d)
   end
   
   def url
-    "#{name}.#{TUTOR_NAME}.#{DNS_DOMAIN}"
+    "#{name}.#{SUB_DOMAIN}.#{DNS_DOMAIN}"
   end
   
   def create_rails_environment

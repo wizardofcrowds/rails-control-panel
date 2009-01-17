@@ -22,5 +22,5 @@ config.action_controller.allow_forgery_protection    = false
 config.action_mailer.delivery_method = :test
 
 DNS_DOMAIN='innogile.com'
-TUTOR_NAME='hoge'
+SUB_DOMAIN='hoge'
 HOME_DIR = "/Users/koichihirano/tmp"

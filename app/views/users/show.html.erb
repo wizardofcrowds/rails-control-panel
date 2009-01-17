@@ -6,7 +6,7 @@
 <p>You can add users and let them create rails deployment environment on this server. Before creating an user, you may want to <%= link_to "create your own", new_user_app_path(@user) %> and deploy some apps to this server. </p>
 <p>Then you may want to <%= link_to "create users", new_user_path %> and invite them.</p>
 
-<p><b>IMPORTANT!:</b> Every user's default password to this server will be "gogo<%= TUTOR_NAME %>" (and yours too!). We mean, when they deploy, they will use "gogo<%= TUTOR_NAME %>", and this is different from their login password for this Rails Factory.</p>
+<p><b>IMPORTANT!:</b> Every user's default password to this server will be "gogo<%= SUB_DOMAIN %>" (and yours too!). We mean, when they deploy, they will use "gogo<%= SUB_DOMAIN %>", and this is different from their login password for this Rails Factory.</p>
 </div>
 <% end %>
 

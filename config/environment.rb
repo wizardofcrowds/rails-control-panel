@@ -13,9 +13,7 @@ require 'nettica/client'
 
 HOME_DIR = "/home"
 DNS_DOMAIN='innogile.com'
-TUTOR_NAME='jeff'
-NETTICA_USER="internalist"
-NETTICA_PASSWORD="nozomu"
+SUB_DOMAIN='jeff'
 INSTANCE_HOSTNAME="localhost"
 
 Rails::Initializer.run do |config|

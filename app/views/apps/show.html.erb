@@ -30,7 +30,7 @@ set :use_sudo, false
 
 set :user, "<%= @app.user.login %>"
 set :runner, "<%= @app.user.login %>"
-set :password, "gogo<%= TUTOR_NAME %>"
+set :password, "gogo<%= SUB_DOMAIN %>"
 
 <% hostname = defined?(INSTANCE_HOSTNAME) ? INSTANCE_HOSTNAME : "error - cannot find ec2 instance" %>
 role :web, '<%= hostname %>'

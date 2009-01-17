@@ -60,7 +60,7 @@ class User < ActiveRecord::Base
   
   def add_unix_user
     if RAILS_ENV=="production"
-      crypt_password=`perl -e "print crypt(\"gogo#{TUTOR_NAME}\",\"xx\")"`
+      crypt_password=`perl -e "print crypt(\"gogo#{SUB_DOMAIN}\",\"xx\")"`
       result = `useradd #{login} -d /#{HOME_DIR}/#{login} -m -p #{crypt_password}`
     elsif RAILS_ENV=="development"
       `mkdir -p "#{HOME_DIR}/#{login}"`
