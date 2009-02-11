@@ -47,4 +47,7 @@ end
     <p>Finally, deploy your application for the first time. Under your rails root directory:</p>
     <pre>cap deploy:setup
 cap deploy</pre>
-	
+<br/>
+<p>Everything went well?</p>
+Visit your app <%= link_to @app.url, "http://#{@app.url}" %>
+<br/>Or may be you want to <%= link_to "install gems", new_special_gem_url %> we don't have?

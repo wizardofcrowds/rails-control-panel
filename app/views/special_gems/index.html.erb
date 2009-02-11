@@ -1,0 +1,9 @@
+<h1>Gems Users Reqested</h1>
+<%= "None found" if @special_gems.empty? %>
+<ul>
+<% @special_gems.each do |special_gem| %>
+  <li><%= link_to "#{special_gem.name} #{special_gem.version}", special_gem_url(special_gem) %></li>
+<% end %>
+</ul>
+<br/>
+<%= link_to "Add Another Gems", new_special_gem_url %>&nbsp;|&nbsp;<%= link_to "Back to console", user_path(current_user) %>

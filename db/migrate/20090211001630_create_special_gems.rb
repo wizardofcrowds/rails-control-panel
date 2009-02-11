@@ -6,6 +6,7 @@ class CreateSpecialGems < ActiveRecord::Migration
       t.text :result_stdout
       t.text :result_stderr
       t.string :version
+      t.string :status, :default => "Being installed now."
       t.timestamps
     end
   end

@@ -1,0 +1,40 @@
+<h1>Gem Installation Status</h1>
+
+<p>
+  <%= label_tag 'Request Time' %><br/>
+  <%= human_time(@special_gem.created_at) %>
+</p>
+
+<p>
+  <%= label_tag 'name' %><br/>
+  <%= @special_gem.name %>
+</p>
+
+<p>
+  <%= label_tag 'version' %><br/>
+  <%= @special_gem.version %>
+</p>
+
+<p>
+  <%= label_tag 'status' %><br/>
+  <%= @special_gem.status %>
+</p>
+
+<h2>Installation Results</h2>
+<p>
+  <%= label_tag 'Installation command exit status' %><br/>
+  <%= @special_gem.result_status %>
+</p>
+
+<p>
+  <%= label_tag 'Stdout' %><br/>
+  <%= @special_gem.result_stdout %>
+</p>
+
+<p>
+  <%= label_tag 'Error Messages' %><br/>
+  <%= @special_gem.result_stderr %>
+</p>
+<br/>
+<%= link_to "List of Gems", special_gems_url %>&nbsp;|&nbsp;<%= link_to "Back to console", user_path(current_user) %>
+

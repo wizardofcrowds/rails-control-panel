@@ -1,0 +1,16 @@
+<h1>Install a Gem</h1>
+
+<%= error_messages_for 'special_gem', :object => @special_gem, :header_message => "Please Try Again!", :message => "We had some problems installing a gem:" %>
+
+<% form_for :special_gem, @special_gem, :url => { :action => "create" } do |f| -%>
+
+<p><%= label_tag 'name' %><br/><span class="hint">Name of gem you want to install</span><br/><br/>
+<%= f.text_field :name %></p>
+
+<p><%= label_tag 'version' %><br/><span class="hint">Optional</span><br/><br/>
+<%= f.text_field :version %></p>
+
+<p><%= submit_tag 'Create' %>&nbsp;Or <%= link_to "Cancel", user_path(current_user) %></p>
+<% end -%>
+<br/>
+<%= link_to "Back to console", user_path(current_user) %>

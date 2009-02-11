@@ -10,9 +10,9 @@ class SpecialGem < ActiveRecord::Base
   end
   
   
-  def before_create
+  def after_create
     begin
-      unless RAILS_ENV=="test"
+      unless RAILS_ENV=="test" || RAILS_ENV=="development"
         com = "gem update --system"
         stdout, stderr = '', ''
         status = spawn com, 'stdout' => stdout, 'stderr' => stderr
@@ -29,10 +29,9 @@ class SpecialGem < ActiveRecord::Base
       puts com
       stdout, stderr = '', ''
       status = spawn com, 'stdout' => stdout, 'stderr' => stderr
-      self.result_status = status
-      self.result_stdout = stdout
-      self.result_stderr = stderr
+      self.update_attributes(:result_status => status, :result_stdout => stdout, :result_stderr => stderr, :status => "Installation completed.")
     rescue
+      self.update_attributes(:status => "Failed to install. Probably could not find the specified gem with the specified version")
       puts $!
     end
   end
