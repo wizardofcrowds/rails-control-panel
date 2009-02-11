@@ -44,9 +44,21 @@ namespace :deploy do
 end
 
 </pre>
-    <p>Finally, deploy your application for the first time. Under your rails root directory:</p>
-    <pre>cap deploy:setup
-cap deploy</pre>
+
+<p>And change <code>config/database.yml</code>'s production part as follows</p>
+<pre>
+production:
+  adapter: sqlite3
+  database: <%= "#{HOME_DIR}/#{@app.user.login}/#{@app.name}" %>/shared/system/production.sqlite3
+  pool: 5
+  timeout: 5000
+</pre>
+
+<p>Finally, deploy your application for the first time. Under your rails root directory:</p>
+<pre>cap deploy:setup
+cap deploy
+cap deploy:migrate
+</pre>
 <br/>
 <p>Everything went well?</p>
 Visit your app <%= link_to @app.url, "http://#{@app.url}" %>
