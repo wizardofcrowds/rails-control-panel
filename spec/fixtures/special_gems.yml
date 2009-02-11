@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  name: MyString
+  result_status: MyString
+  result_stdout: MyText
+  result_stderr: MyText
+
+two:
+  name: MyString
+  result_status: MyString
+  result_stdout: MyText
+  result_stderr: MyText
