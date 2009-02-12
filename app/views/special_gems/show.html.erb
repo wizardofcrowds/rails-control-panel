@@ -23,17 +23,23 @@
 <h2>Installation Results</h2>
 <p>
   <%= label_tag 'Installation command exit status' %><br/>
+<pre>
   <%= @special_gem.result_status %>
+</pre>
 </p>
 
 <p>
   <%= label_tag 'Stdout' %><br/>
+<pre>
   <%= @special_gem.result_stdout %>
+</pre>
 </p>
 
 <p>
   <%= label_tag 'Error Messages' %><br/>
+<pre>
   <%= @special_gem.result_stderr %>
+</pre>
 </p>
 <br/>
 <%= link_to "List of Gems", special_gems_url %>&nbsp;|&nbsp;<%= link_to "Back to console", user_path(current_user) %>
